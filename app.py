@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException, Request, status
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
+from tigzig_api_monitor import APIMonitorMiddleware
 from sqlalchemy import create_engine, text, event
 from sqlalchemy.exc import SQLAlchemyError
 import logging
@@ -55,6 +56,14 @@ app.add_middleware(
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+)
+
+# Add centralized API monitoring middleware
+# v1.3.1 - CF-Connecting-IP fix for accurate GeoIP behind Cloudflare
+app.add_middleware(
+    APIMonitorMiddleware,
+    app_name="SUPABASE_CONNECT_FASTAPI",
+    include_prefixes=("/sqlquery_alchemy/", "/sqlquery_direct/"),  # Specific endpoints only
 )
 
 # Rate limiting configuration (default 100/hour)
