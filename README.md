@@ -284,3 +284,9 @@ Read-only enforcement at the session/transaction level is combined with using a 
 
 
 
+
+## Author
+
+Built by [Amar Harolikar](https://www.linkedin.com/in/amarharolikar/)
+
+Explore 30+ open source AI tools for analytics, databases & automation at [tigzig.com](https://tigzig.com)
